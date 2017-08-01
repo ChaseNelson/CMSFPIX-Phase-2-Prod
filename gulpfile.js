@@ -15,10 +15,10 @@ var gulp         = require('gulp'),
 //*************************************
 gulp.task('scripts', function(cb) {
   pump([
-    gulp.src(['./app/js/*.js', '!./app/js/*.min.js']),
+    gulp.src(['./public/js/*.js', '!./public/js/*.min.js']),
     rename({suffix:'.min'}),
     uglify(),
-    gulp.dest('./app/js/')
+    gulp.dest('./public/js/')
   ], cb);
 });
 
@@ -27,7 +27,7 @@ gulp.task('scripts', function(cb) {
 //*************************************
 gulp.task('html', function(cb) {
   pump([
-    gulp.src('./app/*.html'),
+    gulp.src('./public/*.html'),
     pipe(reload({stream:true}))
   ], cb);
 });
@@ -37,10 +37,10 @@ gulp.task('html', function(cb) {
 //*************************************
 gulp.task('css', function(cb) {
   pump([
-    gulp.src(['./app/css/*.css', '!./app/css/*.min.css']),
+    gulp.src(['./public/css/*.css', '!./public/css/*.min.css']),
     rename({suffix:'.min'}),
     uglifycss(),
-    gulp.dest('./app/css'),
+    gulp.dest('./public/css'),
     browserSync.stream()
   ], cb);
 })
@@ -50,9 +50,9 @@ gulp.task('css', function(cb) {
 //*************************************
 gulp.task('image', function(cb) {
   pump([
-    gulp.src('./app/images/*'),
+    gulp.src('./public/images/*'),
     imagemin(),
-    gulp.dest('./app/images/*')
+    gulp.dest('./public/images/*')
   ], cb);
 });
 
@@ -62,19 +62,19 @@ gulp.task('image', function(cb) {
 gulp.task('browser-sync', function() {
   browserSync.init({
     server:{
-      baseDir: "./app"
+      baseDir: "./public"
     }
   });
-  gulp.watch("app/*.html").on('change', browserSync.reload);
+  gulp.watch("public/*.html").on('change', browserSync.reload);
 });
 
 //*************************************
 //     WATCH TASK
 //*************************************
 gulp.task('watch', function() {
-  gulp.watch('./app/js/**/*.js', ['scripts']);
-  gulp.watch('./app/css/*.css', ['css']);
-  gulp.watch('./app/images/*', ['image']);
+  gulp.watch('./public/js/**/*.js', ['scripts']);
+  gulp.watch('./public/css/*.css', ['css']);
+  gulp.watch('./public/images/*', ['image']);
 })
 
 //*************************************
