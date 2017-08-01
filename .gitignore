@@ -1,3 +1,5 @@
 node_modules/
 package.json
 package-lock.json
+app/js/firebaseConfig.js
+app/js/firebaseConfig.min.js
