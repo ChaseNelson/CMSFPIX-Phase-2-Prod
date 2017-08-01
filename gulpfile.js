@@ -27,7 +27,7 @@ gulp.task('scripts', function(cb) {
 //*************************************
 gulp.task('html', function(cb) {
   pump([
-    gulp.src('./app/**/*.html'),
+    gulp.src('./app/*.html'),
     pipe(reload({stream:true}))
   ], cb);
 });
@@ -40,7 +40,8 @@ gulp.task('css', function(cb) {
     gulp.src(['./app/css/*.css', '!./app/css/*.min.css']),
     rename({suffix:'.min'}),
     uglifycss(),
-    gulp.dest('./app/css')
+    gulp.dest('./app/css'),
+    browserSync.stream()
   ], cb);
 })
 
@@ -64,6 +65,7 @@ gulp.task('browser-sync', function() {
       baseDir: "./app"
     }
   });
+  gulp.watch("app/*.html").on('change', browserSync.reload);
 });
 
 //*************************************
@@ -71,7 +73,6 @@ gulp.task('browser-sync', function() {
 //*************************************
 gulp.task('watch', function() {
   gulp.watch('./app/js/**/*.js', ['scripts']);
-  gulp.watch('./app/**/*.html', ['html']);
   gulp.watch('./app/css/*.css', ['css']);
   gulp.watch('./app/images/*', ['image']);
 })
