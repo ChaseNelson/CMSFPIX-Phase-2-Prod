@@ -15,11 +15,10 @@ var gulp         = require('gulp'),
 //*************************************
 gulp.task('scripts', function(cb) {
   pump([
-    gulp.src(['./app/js/**/*.js', '!/app/js/**/*.min.js']),
-    plumber(),
+    gulp.src(['./app/js/*.js', '!./app/js/*.min.js']),
     rename({suffix:'.min'}),
     uglify(),
-    gulp.dest('./app/js/**/')
+    gulp.dest('./app/js/')
   ], cb);
 });
 
@@ -38,7 +37,7 @@ gulp.task('html', function(cb) {
 //*************************************
 gulp.task('css', function(cb) {
   pump([
-    gulp.src(['./app/css/*.css', '!/app/css/*.min.css']),
+    gulp.src(['./app/css/*.css', '!./app/css/*.min.css']),
     rename({suffix:'.min'}),
     uglifycss(),
     gulp.dest('./app/css')
