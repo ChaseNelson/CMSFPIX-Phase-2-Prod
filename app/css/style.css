@@ -57,3 +57,10 @@ footer {
   background-color: #FFC30B;
   color: #000;
 }
+a {
+  text-decoration: none;
+}
+
+main a {
+  color: #3C2C05;
+}
