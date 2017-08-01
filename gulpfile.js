@@ -7,7 +7,6 @@ var gulp         = require('gulp'),
     uglify       = require('gulp-uglify'),
     pump         = require('pump'),
     uglifycss    = require('gulp-uglifycss'),
-    minifyInline = require('gulp-minify-inline'),
     imagemin     = require('gulp-imagemin'),
     rename       = require('gulp-rename');
 
@@ -16,7 +15,7 @@ var gulp         = require('gulp'),
 //*************************************
 gulp.task('scripts', function(cb) {
   pump([
-    gulp.src(['./app/js/**/*.js', '!./app/js/**/*.min.js']),
+    gulp.src(['./app/js/**/*.js', '!/app/js/**/*.min.js']),
     plumber(),
     rename({suffix:'.min'}),
     uglify(),
@@ -39,10 +38,10 @@ gulp.task('html', function(cb) {
 //*************************************
 gulp.task('css', function(cb) {
   pump([
-    gulp.src('./app/css/*.css', '!./app/css/*.min.css'),
+    gulp.src(['./app/css/*.css', '!/app/css/*.min.css']),
     rename({suffix:'.min'}),
     uglifycss(),
-    gulp.dest('./css')
+    gulp.dest('./app/css')
   ], cb);
 })
 
@@ -81,4 +80,4 @@ gulp.task('watch', function() {
 //*************************************
 //     DEFAULT TASK
 //*************************************
-gulp.task('default', ['scripts', 'css', 'image', 'html', 'browser-sync', 'watch']);
+gulp.task('default', ['scripts', 'css', 'image', 'browser-sync', 'watch']);
