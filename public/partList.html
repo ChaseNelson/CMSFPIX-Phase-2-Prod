@@ -26,10 +26,21 @@
       </nav>
       <main>
         <h1>Part List</h1>
-        <!-- Add content here -->
+        <table border="0" cellpadding="5" class="partList">
+          <tr>
+            <td>
+              <table border="1" id="sheetList"></table>
+            </td>
+            <td>
+              <table border="1" id="wafferList"></table>
+            </td>
+          </tr>
+        </table>
       </main>
     </nav>
     <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
     <script src="js/firebaseConfig.min.js"></script>
+    <script src="js/partList.js" charset="utf-8"></script>
+    <script src="node_modules\jquery\dist\jquery.min.js"></script>
   </body>
 </html>
