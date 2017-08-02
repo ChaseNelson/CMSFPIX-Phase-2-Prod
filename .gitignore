@@ -1,7 +1,7 @@
-node_modules/
 package.json
 package-lock.json
 public/js/firebaseConfig.js
 public/js/firebaseConfig.min.js
 firebase.json
 firebase-debug.log
+functions/node_modules
