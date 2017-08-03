@@ -5,3 +5,4 @@ public/js/firebaseConfig.min.js
 firebase.json
 firebase-debug.log
 functions/node_modules
+node_modules/
