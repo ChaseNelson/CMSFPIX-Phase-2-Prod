@@ -1,8 +1,14 @@
 database = firebase.database();
-var sheetRef  = database.ref('Sheet');
-var wafferRef = database.ref('Waffer');
-sheetRef.on('value', gotData, errData);
-wafferRef.on('value', gotData, errData);
+var waferRef           = database.ref('Wafer');
+var sensorRef          = database.ref('Sensor');
+var hdiRef             = database.ref('HDI');
+var bareModuleRef      = database.ref('Bare Module');
+var assembledModuleRef = database.ref('Assembled Module');
+waferRef.on('value', gotData, errData);
+sensorRef.on('value', gotData, errData);
+hdiRef.on('value', gotData, errData);
+bareModuleRef.on('value', gotData, errData);
+assembledModuleRef.on('value', gotData, errData);
 
 function gotData(data) {
   var value = data.val();
