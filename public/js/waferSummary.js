@@ -1,17 +1,17 @@
 var id;
 
-getData(key) {
+function getData(key) {
   id = key;
   database = firebase.database();
   var ref = database.ref('Wafer');
   ref.on('value', gotData, errData);
 }
 
-gotData(data) {
+function gotData(data) {
   var value = data.val();
   console.log(value[id]);
 }
 
-errData(data) {
+function errData(data) {
   console.log("ERROR :: " + data);
 }
