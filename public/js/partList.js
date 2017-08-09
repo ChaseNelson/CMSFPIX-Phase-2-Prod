@@ -17,13 +17,21 @@ function gotData(data) {
   var partType;
   var html = "";
   for (var i = 0; i < keys.length; i++) {
+    html = "";
     var k = keys[i];
     var name = value[k].name;
     partType = value[k].partType;
-    html += '<tr><td>'+ name + '</td></tr>';
+    var part = partType.toLowerCase();
+    if (partType.toLowerCase() == 'bare module') {
+      part = 'bareModule';
+    } else if (partType.toLowerCase() == 'assembled module') {
+      part = 'assembledModule';
+    }
+    var string = part + "Summary.html?id=" + k;
+    console.log(string);
+    html = "<tr><td><a href=\""+ string + "\">" + name + "</a></td></tr>"
   }
   if (html != "" && html != null) {
-    html = "<tr><th>" + partType + "</th></tr>" + html;
     var id = partType.toLowerCase() + 'List';
     document.getElementById(id).innerHTML = html;
   }
