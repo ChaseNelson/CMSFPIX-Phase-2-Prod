@@ -26,150 +26,121 @@
         </nav>
         <main>
           <h1>Wafer Summary</h1>
-          <div id="container"></div>
+          <div id="CommentRoot"></div>
         </main>
     </div>
     <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
     <script src="js/firebaseConfig.min.js"></script>
     <script src="node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <script src="js/waferSummary.min.js" charset="utf-8" type="text/jsx;harmony=true"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.11.0/es6-shim.min.js"></script>
-    <script src="http://fb.me/react-with-addons-0.11.0.min.js"></script>
+    <script src="http://fb.me/react-with-addons-0.11.0.js"></script>
     <script src="http://fb.me/JSXTransformer-0.11.0.js"></script>
-    <script src="js/waferSummary.min.js" charset="utf-8"></script>
-    <script type="text/jsx;harmony=true">
-      var Comment = React.createClass({
-        getInitialState: function() {
-          return {editing: false, textVal: ''}
-        },
-        handleChange: function(evt) {
-          this.setState({textVal: evt.target.value});
-        },
-        edit: function() {
-          this.setState({editing: true});
-        },
-        cancel: function() {
-          this.setState({editing: false});
-        },
-        save: function() {
-          var val = this.state.textVal;
-          this.props.updateCommentText(val, this.props.index);
-          var field = this.props.field;
-          var time  = new Date();
-          var h    = time.getHours();
-          var m    = time.getMinutes();
-          var s    = time.getSeconds();
-          var dd   = time.getDate();
-          var mm   = time.getMonth() + 1;
-          var yyyy = time.getFullYear();
-          if (dd<10) dd='0'+dd;
-          if (mm<10)mm='0'+mm;
-          time = mm + '-' + dd + '-' + yyyy + ' ' + h + ':' + m + ':' + s;
-          updatePart(field, val);
-
-          this.setState({editing: false});
-        },
-        renderNormal: function() {
-          return (
-            <div className="commentContainer">
-              <table>
-                <tr>
-                  <td>
-                    <div className="commentText">{this.props.children}</div>
-                  </td>
-                  <td>
-                    <button onClick={this.edit} className="button-primary">Edit</button>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          );
-        },
-        renderForm: function() {
-          var type;
-          var step = '0.0001';
-          var min  = 0;
-          switch (this.props.index) {
-            case 0:
-            case 2:
-              type = 'text';
-              break;
-            case 1:
-              type = 'number'
-              step = '0.001';
-              break;
-            default:
-              type = 'text';
-              break;
-          }
-          return (
-            <div className="commentContainer">
-              <input placeholder={this.props.children} value={this.props.textVal} onChange={this.handleChange} type={type} step={step} min={min}></input>
-              <br/>
-              <button onClick={this.save} className="button-save">Save</button>
-              <button onClick={this.cancel} className="button-cancel">Cancel</button>
-            </div>
-          );
-        },
-        render: function() {
-          if (this.state.editing) {
-            return this.renderForm();
-          } else {
+    <script type="text/jsx;harmony=true">/** @jsx React.DOM */
+      function renderReact(){
+        var Comment = React.createClass({
+          getInitialState: function() {
+            return {editing: false, textVal: ''};
+          },
+          handleChange: function(evt) {
+            this.setState({textVal: evt.target.value});
+          },
+          edit: function() {
+            this.setState({editing: true});
+          },
+          cancel: function() {
+            this.setState({editing: false});
+          },
+          save: function() {
+            var val = this.state.textVal;
+            this.props.updateCommentText(val, this.props.index);
+            var field = this.props.field;
+            updatePart(field, val);
+            this.setState({editing: false});
+          },
+          renderNormal: function() {
+            return (
+              <div className="commentContainer">
+                <table>
+                  <tr>
+                    <td>
+                      <div className="commentText">{this.props.children}</div>
+                    </td>
+                    <td>
+                      <button onClick={this.edit} className="button-primary">Edit</button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            );
+          },
+          renderForm: function() {
+            return (
+              <div className="commentContainer">
+                <input placeholder="test" value={this.props.textVal} onChange={this.handleChange} type="text"/>
+                <br/>
+                <button onClick={this.save} className="button-primary">Save</button>
+                <button onClick={this.cancel} className="button-cancel">Cancel</button>
+              </div>
+            )
+          },
+          render: function() {
+            if (this.state.editing) {
+              return this.renderForm();
+            }
             return this.renderNormal();
-          }
-        }
-      });
+          },
+        });
 
-      var Board = React.createClass({
-        getInitialState: function() {
-          return {
-            comments: valueArray
+        var Board = React.createClass({
+          getInitialState: function() {
+            return {comments: valueArray};
+          },
+          updateComment: function(newText, i) {
+            var arr = this.state.comments;
+            arr[i] = newText;
+            this.setState({comments: arr});
+          },
+          eachComment: function(text, i) {
+            return (
+              <tr>
+                <td>{keyArray[i]}</td>
+                <td>
+                  <Comment key={i} field={fieldArray[i]} updateCommentText={this.updateComment}>
+                    {text}
+                  </Comment>
+                </td>
+              </tr>
+            );
+          },
+          render: function() {
+            return (
+              <div className="board">
+                <table cellPadding="5">
+                  <tr>
+                    <td>Last Edit</td>
+                    <td>{lastEdit}</td>
+                  </tr>
+                  <tr>
+                    <td>Object Type</td>
+                    <td>Wafer</td>
+                  </tr>
+                  <tr>
+                    <td>Name</td>
+                    <td>{name}</td>
+                  </tr>
+                  {this.state.comments.map(this.eachComment)}
+                </table>
+              </div>
+            );
           }
-        },
-        updateComment: function(newText, i) {
-          var arr = this.state.comments;
-          arr[i] = newText;
-          this.setState({comments: arr});
-        },
-        eachComment: function(text, i) {
-          return (
-            <tr>
-              <td>
-                {keyArray[i]}
-              </td>
-              <td>
-                <Comment key={i} index={i} field={fieldArray[i]} updateCommentText={this.updateComment}>
-                  {text}
-                </Comment>
-              </td>
-            </tr>
-          );
-        },
-        render: function() {
-          return (
-            <div className="board">
-              <table>
-                <tr>
-                  <td>Last Edit</td>
-                  <td>{lastEdit}</td>
-                </tr>
-                <tr>
-                  <td>Object Type</td>
-                  <td>Wafer</td>
-                </tr>
-                <tr>
-                  <td>Name</td>
-                  <td>{name}</td>
-                </tr>
-                {this.state.comments.map(this.eachComment)}
-              </table>
-            </div>
-          );
-        }
-      });
-      React.renderComponent(
-        <Board />,
-        document.getElementById('container')
-      );
+        })
+
+        React.renderComponent(
+          <Board />,
+          document.getElementById('CommentRoot')
+        );
+      };
     </script>
   </body>
 </html>
