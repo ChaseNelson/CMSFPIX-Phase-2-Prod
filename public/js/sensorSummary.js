@@ -59,23 +59,3 @@ function updatePart(field, val) {
   obj['lastEdit'] = mm + '-' + dd + '-' + yyyy + ' ' + h + ':' + m + ':' + s;
   ref.set(obj);
 }
-
-function waferData(data) {
-  var val = data.val();
-  waferName = val.name;
-  console.log("waferName :: " + waferName);
-}
-
-function waferErr(data) {
-  console.error(data);
-}
-
-function moduleData(data) {
-  var val = data.val();
-  moduleName = val.name;
-  console.log("moduleName :: " + moduleName);
-}
-
-function moduleErr(data) {
-  console.error(data);
-}
