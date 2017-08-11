@@ -77,7 +77,7 @@
           renderForm: function() {
             return (
               <div className="commentContainer">
-                <input placeholder="test" value={this.props.textVal} onChange={this.handleChange} type="text"/>
+                <input placeholder={this.props.children} value={this.props.textVal} onChange={this.handleChange} type="text"/>
                 <br/>
                 <button onClick={this.save} className="button-primary">Save</button>
                 <button onClick={this.cancel} className="button-cancel">Cancel</button>
