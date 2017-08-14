@@ -2,33 +2,145 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.min.css">
     <title>Bare Module Summary</title>
   </head>
   <body>
     <div id="wrapper">
       <header>
-        <a href="index.html">
-          <img src="images/pu_logo.jpg" width="200" height="100" alt="Purdue University Logo">
-          <img src="images/CMS_logo_col.png" width="100" height="100" alt="CMS Logo">
-        </a>
-      </header>
-      <nav>
-        <a href="partList.html">Part List</a>
-        <br>
-        <a href="testList.html">Test List</a>
-        <br>
-        <a href="https://docs.google.com/document/d/1zDu6hiUR7r6qumQPcKdV3OXh7vLpGjodTjLopjbufKQ/edit?usp=sharing" target="_blank">Project Logbook</a>
-        <br>
-        <a href="https://drive.google.com/drive/folders/0B04OIAGnMDYxbXBkTWJmMm5hN0E?usp=sharing" target="_blank">Project Google Drive</a>
-        <br>
-        <a href="contact.html">Contact/Issues</a>
-      </nav>
-      <main>
-        <h2>Bare Module Summary</h2>
-      </main>
+          <a href="index.html">
+            <img src="images/pu_logo.jpg" width="200" height="100" alt="Purdue University Logo">
+            <img src="images/CMS_logo_col.png" width="100" height="100" alt="CMS Logo">
+          </a>
+        </header>
+        <nav>
+          <a href="partList.html">Part List</a>
+          <br>
+          <a href="testList.html">Test List</a>
+          <br>
+          <a href="https://docs.google.com/document/d/1zDu6hiUR7r6qumQPcKdV3OXh7vLpGjodTjLopjbufKQ/edit?usp=sharing" target="_blank">Project Logbook</a>
+          <br>
+          <a href="https://drive.google.com/drive/folders/0B04OIAGnMDYxbXBkTWJmMm5hN0E?usp=sharing" target="_blank">Project Google Drive</a>
+          <br>
+          <a href="contact.html">Contact/Issues</a>
+        </nav>
+        <main>
+          <h1>Bare Module Summary</h1>
+          <div id="CommentRoot"></div>
+        </main>
     </div>
-    <script src="js/firebaseConfig.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    <script src="js/firebaseConfig.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <script src="js/bareModuleSummary.min.js" charset="utf-8" type="text/jsx;harmony=true"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.11.0/es6-shim.min.js"></script>
+    <script src="http://fb.me/react-with-addons-0.11.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.11.0.js"></script>
+    <script type="text/jsx;harmony=true">/** @jsx React.DOM */
+      function renderReact(){
+        var Comment = React.createClass({
+          getInitialState: function() {
+            return {editing: false, textVal: ''};
+          },
+          handleChange: function(evt) {
+            this.setState({textVal: evt.target.value});
+          },
+          edit: function() {
+            this.setState({editing: true});
+          },
+          cancel: function() {
+            this.setState({editing: false});
+          },
+          save: function() {
+            var val = this.state.textVal;
+            this.props.updateCommentText(val, this.props.index);
+            var field = this.props.field;
+            updatePart(field, val);
+            this.setState({editing: false});
+          },
+          renderNormal: function() {
+            return (
+              <div className="commentContainer">
+                <table>
+                  <tr>
+                    <td>
+                      <div className="commentText">{this.props.children}</div>
+                    </td>
+                    <td>
+                      <button onClick={this.edit} className="button-primary">Edit</button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            );
+          },
+          renderForm: function() {
+            return (
+              <div className="commentContainer">
+                <input placeholder={this.props.children} value={this.props.textVal} onChange={this.handleChange} type="text"/>
+                <br/>
+                <button onClick={this.save} className="button-primary">Save</button>
+                <button onClick={this.cancel} className="button-cancel">Cancel</button>
+              </div>
+            )
+          },
+          render: function() {
+            if (this.state.editing) {
+              return this.renderForm();
+            }
+            return this.renderNormal();
+          },
+        });
+
+        var Board = React.createClass({
+          getInitialState: function() {
+            return {comments: valueArray};
+          },
+          updateComment: function(newText, i) {
+            var arr = this.state.comments;
+            arr[i] = newText;
+            this.setState({comments: arr});
+          },
+          eachComment: function(text, i) {
+            return (
+              <tr>
+                <td>{keyArray[i]}</td>
+                <td>
+                  <Comment key={i} field={fieldArray[i]} updateCommentText={this.updateComment}>
+                    {text}
+                  </Comment>
+                </td>
+              </tr>
+            );
+          },
+          render: function() {
+            return (
+              <div className="board">
+                <table cellPadding="5">
+                  <tr>
+                    <td>Last Edit</td>
+                    <td>{lastEdit}</td>
+                  </tr>
+                  <tr>
+                    <td>Object Type</td>
+                    <td>Bare Module</td>
+                  </tr>
+                  <tr>
+                    <td>Name</td>
+                    <td>{name}</td>
+                  </tr>
+                  {this.state.comments.map(this.eachComment)}
+                </table>
+              </div>
+            );
+          }
+        })
+
+        React.renderComponent(
+          <Board />,
+          document.getElementById('CommentRoot')
+        );
+      };
+    </script>
   </body>
 </html>
