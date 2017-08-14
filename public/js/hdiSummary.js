@@ -1,20 +1,20 @@
 var id = parent.document.URL.substring(parent.document.URL.indexOf('id=') + 3, parent.document.URL.length);
 database = firebase.database();
-var ref = database.ref('Wafer/' + id);
+var ref = database.ref('HDI/' + id);
 ref.on('value', gotData, errData);
 
 var lastEdit;
 var name;
 var keyArray   = [
+  "Location",
   "Status",
-  "Thickness",
-  "Vendor"
+  "On Module"
 ];
 var valueArray = [];
 var fieldArray = [
+  "location",
   "status",
-  "thickness",
-  "vendor"
+  "onModule"
 ];
 
 
@@ -23,18 +23,26 @@ function gotData(data) {
   name = value.name;
   lastEdit = value.lastEdit;
   for (var i = 0; i < fieldArray.length; i++) {
-    valueArray[i] = value[fieldArray[i]];
+    if (fieldArray[i] == "onModule") {
+      valueArray[i] = value[fieldArray[i]].name;
+    } else {
+      valueArray[i] = value[fieldArray[i]];
+    }
   }
   renderReact();
 }
 
 function errData(data) {
-  console.log("ERROR :: " + data);
+  console.error("ERROR :: " + data);
 }
 
 function updatePart(field, val) {
   var obj = value;
-  obj[field] = val;
+  if (field == "onModule") {
+    obj[field].name = val;
+  } else {
+    obj[field] = val;
+  }
   var time = new Date();
   var h = time.getHours();
   var m = time.getMinutes();
