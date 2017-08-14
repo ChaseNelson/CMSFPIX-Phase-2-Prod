@@ -33,7 +33,7 @@ function gotData(data) {
 }
 
 function errData(data) {
-  console.error("ERROR :: " + data);
+  console.error(data);
 }
 
 function updatePart(field, val) {

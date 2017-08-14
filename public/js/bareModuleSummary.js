@@ -41,12 +41,18 @@ function gotData(data) {
 }
 
 function errData(data) {
-  console.log("ERROR :: " + data);
+  console.error( data);
 }
 
 function updatePart(field, val) {
   var obj = value;
-  obj[field] = val;
+  if (field == "ofSensor") {
+    obj["ofSensor"].name = val;
+  } else if (field == "ofHDI") {
+    obj["ofHDI"].name = val;
+  } else {
+    obj[field] = val;
+  }
   var time = new Date();
   var h = time.getHours();
   var m = time.getMinutes();
