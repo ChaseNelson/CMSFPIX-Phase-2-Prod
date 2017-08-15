@@ -17,7 +17,6 @@ function gotData(data) {
   var partType;
   var html = "";
   for (var i = 0; i < keys.length; i++) {
-    html = "";
     var k = keys[i];
     var name = value[k].name;
     partType = value[k].partType;
@@ -29,7 +28,8 @@ function gotData(data) {
     }
     var string = part + "Summary.html?id=" + k;
     console.log(string);
-    html = "<tr><td><a href=\""+ string + "\">" + name + "</a></td></tr>"
+    html += "<tr><td><a href=\""+ string + "\">" + name + "</a></td></tr>"
+    console.log(html);
   }
   if (html != "" && html != null) {
     var id = partType.toLowerCase() + 'List';
