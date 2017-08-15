@@ -65,3 +65,23 @@ function updatePart(field, val) {
   obj['lastEdit'] = mm + '-' + dd + '-' + yyyy + ' ' + h + ':' + m + ':' + s;
   ref.set(obj);
 }
+
+function toAssembled() {
+  if (value == null) {
+    return;
+  }
+  data = {
+    currentLocation: '',
+    flipChipBonder: value.flipChipBonder,
+    location: '',
+    name: value.name,
+    ofHDI: value.ofHDI,
+    ofSensor: value.ofSensor,
+    partType: 'Assembled Module',
+    processedAt: value.processingAt,
+    status: value.status
+  };
+  database.ref('Assembled Module').push(data);
+  database.ref('Bare Module/' + id).remove();
+  document.getElementById('assembledButton').innerHTML = '';
+}

@@ -24,15 +24,18 @@
           <br>
           <a href="contact.html">Contact/Issues</a>
         </nav>
+        <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+        <script src="js/firebaseConfig.min.js"></script>
+        <script src="node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script>
+        <script src="js/bareModuleSummary.min.js" charset="utf-8" type="text/jsx;harmony=true"></script>
         <main>
           <h1>Bare Module Summary</h1>
           <div id="CommentRoot"></div>
+          <div id="assembledButton">
+            <button onclick="toAssembled()" class="button-danger">Module Assembled</button>
+          </div>
         </main>
     </div>
-    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
-    <script src="js/firebaseConfig.min.js"></script>
-    <script src="node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script>
-    <script src="js/bareModuleSummary.min.js" charset="utf-8" type="text/jsx;harmony=true"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.11.0/es6-shim.min.js"></script>
     <script src="http://fb.me/react-with-addons-0.11.0.js"></script>
     <script src="http://fb.me/JSXTransformer-0.11.0.js"></script>
