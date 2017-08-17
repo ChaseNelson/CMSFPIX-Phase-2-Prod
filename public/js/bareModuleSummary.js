@@ -81,9 +81,9 @@ function toAssembled() {
     processedAt: value.processingAt,
     status: value.status
   };
-  // database.ref('Bare Module/' + id).remove();
+  database.ref('Bare Module/' + id).remove();
   var refStr = database.ref('Assembled Module').push(data);
   str = 'Assembled%20Module/';
   refStr = refStr.substring(refStr.indexOf(str) + str.length);
-  window.location = "assembledModuleSummary.html?id=" + str;
+  window.location = "assembledModuleSummary.html?id=" + refStr;
 }
