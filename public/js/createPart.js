@@ -10,7 +10,11 @@ function createHDI() {
     partType: 'HDI',
     status: status,
   };
-  firebase.database().ref('HDI').push(data);
+  var refStr = firebase.database().ref('HDI').push(data);
+  refStr = refStr.toString();
+  var str = "HDI/";
+  var key = refStr.substring(refStr.indexOf(str) + str.length);
+  window.location = "hdiSummary.html?id=" + key;
 }
 
 function createSensor() {
@@ -21,7 +25,32 @@ function createSensor() {
     name: name,
     partType: 'Sensor'
   };
-  firebase.database().ref('Sensor').push(data);
+  var refStr = firebase.database().ref('Sensor').push(data);
+  refStr = refStr.toString();
+  var str = "Sensor/";
+  var key = refStr.substring(refStr.indexOf(str) + str.length);
+  window.location = "sensorSummary.html?id=" + key;
+}
+
+function createWafer() {
+  var name = document.getElementById('name').value;
+  var status = document.getElementById('status').value;
+  var thickness = document.getElementById('thickness').value;
+  var vendor = document.getElementById('vendor').value;
+  var time = getTime();
+  data = {
+    lastEdit: time,
+    name: name,
+    partType: 'Wafer',
+    status: status,
+    thickness: thickness,
+    vendor: vendor
+  };
+  var refStr = firebase.database().ref('Wafer').push(data);
+  refStr = refStr.toString();
+  var str = "Wafer/";
+  var key = refStr.substring(refStr.indexOf(str) + str.length);
+  window.location = "waferSummary.html?id=" + key;
 }
 
 function getTime() {
