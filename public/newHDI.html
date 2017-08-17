@@ -6,6 +6,45 @@
     <title>New HDI</title>
   </head>
   <body>
-    <h1>New HDI</h1>
+    <div id="wrapper">
+      <header>
+        <a href="index.php">
+          <img src="images/pu_logo.jpg" width="200" height="100" alt="Purdue University Logo">
+          <img src="images/CMS_logo_col.png" width="100" height="100" alt="CMS Logo">
+        </a>
+      </header>
+      <nav>
+        <a href="partList.html">Part List</a>
+        <br>
+        <a href="testList.html">Test List</a>
+        <br>
+        <a href="https://docs.google.com/document/d/1zDu6hiUR7r6qumQPcKdV3OXh7vLpGjodTjLopjbufKQ/edit?usp=sharing" target="_blank">Project Logbook</a>
+        <br>
+        <a href="https://drive.google.com/drive/folders/0B04OIAGnMDYxbXBkTWJmMm5hN0E?usp=sharing" target="_blank">Project Google Drive</a>
+        <br>
+        <a href="contact.html">Contact/Issues</a>
+      </nav>
+      <main>
+        <h1>New HDI</h1>
+        <div style="width:300px">
+          <label for="name">Name</label>
+          <input type="text" name="Name" id="name" style="float:right">
+          <br><br>
+          <label for="location">Location</label>
+          <input type="text" name="location" id="location" style="float:right">
+          <br><br>
+          <label for="onModule">Module</label>
+          <input type="text" name="onModule" id="onModule" style="float:right">
+          <br><br>
+          <label for="status">Status</label>
+          <input type="text" name="status" id="status" style="float:right">
+          <br><br>
+          <button type="button" name="button" onclick="createHDI()" style="float:right">Create HDI</button>
+        </div>
+      </main>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    <script src="js/firebaseConfig.min.js"></script>
+    <script src="js/addHDI.min.js" charset="utf-8"></script>
   </body>
 </html>
