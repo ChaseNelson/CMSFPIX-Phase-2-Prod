@@ -53,6 +53,29 @@ function createWafer() {
   window.location = "waferSummary.html?id=" + key;
 }
 
+function createModule() {
+  var name = document.getElementById('name').value;
+  var processingAt = document.getElementById('processingAt').value;
+  var flipChipBonder = document.getElementById('flipChipBonder').value;
+  var staus = document.getElementById('status').value;
+  var time = getTime();
+  data = {
+    flipChipBonder: flipChipBonder,
+    lastEdit: time,
+    name: name,
+    partType: 'Bare Module',
+    processingAt: processingAt,
+    status: status
+  };
+  var refStr = firebase.database().ref('Bare Module').push(data);
+  refStr = refStr.toString();
+  var str = "Bare%20Module/";
+  console.log(refStr);
+  var key = refStr.substring(refStr.indexOf(str) + str.length);
+  console.log('key :: ' + key);
+  window.location = "bareModuleSummary.html?id=" + key;
+}
+
 function getTime() {
   var time = new Date();
   var h = time.getHours();
@@ -65,4 +88,20 @@ function getTime() {
   if (mm < 10) mm = '0' + mm;
   var time = mm + '-' + dd + '-' + yyyy + ' ' + h + ':' + m + ':' + s;
   return time;
+}
+
+function openSensor() {
+  window.location = "newSensor.html";
+}
+
+function openHDI() {
+  window.location = "newHDI.html";
+}
+
+function openWafer() {
+  window.location = "newWafer.html";
+}
+
+function openModule() {
+  window.location = "newModule.html";
 }
