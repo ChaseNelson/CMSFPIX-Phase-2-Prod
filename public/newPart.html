@@ -21,7 +21,7 @@
         <br>
         <a href="testList.html">Test List</a>
         <br>
-        <a href="https://docs.google.com/document/d/1zDu6hiUR7r6qumQPcKdV3OXh7vLpGjodTjLopjbufKQ/edit?usp=sharing" target="_blank">Project Logbook</a>
+        <a href="creatPart.html" target="_blank">Create Part</a>
         <br>
         <a href="https://drive.google.com/drive/folders/0B04OIAGnMDYxbXBkTWJmMm5hN0E?usp=sharing" target="_blank">Project Google Drive</a>
         <br>
@@ -29,11 +29,17 @@
       </nav>
       <main>
         <h1>Create New Part</h1>
+        <button type="button" name="button" onclick="openWafer()" class="button-primary">Create Wafer</button>
+        <br><br>
+        <button type="button" name="button" onclick="openSensor()" class="button-primary">Create Sensor</button>
+        <br><br>
+        <button type="button" name="button" onclick="openHDI()" class="button-primary">Create HDI</button>
+        <br><br>
+        <button type="button" name="button" onclick="openModule()" class="button-primary">Create Module</button>
       </main>
     </div>
     <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
     <script src="js/firebaseConfig.min.js"></script>
-    <script src="js/partList.js" charset="utf-8"></script>
-    <script src="node_modules\jquery\dist\jquery.min.js"></script>
+    <script src="js/createPart.min.js"></script>
   </body>
 </html>
