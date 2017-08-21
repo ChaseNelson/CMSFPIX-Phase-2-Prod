@@ -38,7 +38,7 @@ function createWafer() {
   var thickness = document.getElementById('thickness').value;
   var vendor = document.getElementById('vendor').value;
   var time = getTime();
-  data = {
+  var data = {
     lastEdit: time,
     name: name,
     partType: 'Wafer',
@@ -59,7 +59,7 @@ function createModule() {
   var flipChipBonder = document.getElementById('flipChipBonder').value;
   var staus = document.getElementById('status').value;
   var time = getTime();
-  data = {
+  var data = {
     flipChipBonder: flipChipBonder,
     lastEdit: time,
     name: name,
@@ -70,9 +70,7 @@ function createModule() {
   var refStr = firebase.database().ref('Bare Module').push(data);
   refStr = refStr.toString();
   var str = "Bare%20Module/";
-  console.log(refStr);
   var key = refStr.substring(refStr.indexOf(str) + str.length);
-  console.log('key :: ' + key);
   window.location = "bareModuleSummary.html?id=" + key;
 }
 
