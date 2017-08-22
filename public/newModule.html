@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="/css/style.min.css">
     <title>New Module</title>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    <script src="js/firebaseConfig.min.js"></script>
+    <script src="js/newModule.min.js" charset="utf-8"></script>
   </head>
   <body>
     <div id="wrapper">
@@ -40,19 +43,21 @@
           <input type="text" name="status" id="status" style="float:right">
           <br><br>
           <label for="ofSensor">Comprised of Sensor</label>
-          <input type="text" name="ofSensor" id="ofSensor" style="float:right">
+          <!-- <input type="text" name="ofSensor" id="ofSensor" style="float:right"> -->
           <!-- add a dropdown list of names of sensors with the values being the key -->
+          <select id="ofSensor" name="ofSensor">
+          </select>
           <br><br>
           <label for="ofHDI">Comprised of HDI</label>
-          <input type="text" name="ofHDI" id="ofHDI" style="float:right">
+          <!-- <input type="text" name="ofHDI" id="ofHDI" style="float:right"> -->
           <!-- add a dropdown list of names of HDIs with the values being the key  -->
+          <select id="ofHDI" name="ofHDI">
+          </select>
           <br><br>
           <button type="button" name="button" onclick="createModule()" style="float:right">Create Module</button>
         </div>
       </main>
     </div>
-    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
-    <script src="js/firebaseConfig.min.js"></script>
     <script src="js/createPart.min.js" charset="utf-8"></script>
   </body>
 </html>
